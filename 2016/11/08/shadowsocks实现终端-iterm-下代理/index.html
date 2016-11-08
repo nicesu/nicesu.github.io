@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="##Shadowsocks
+github 地址
+码农对于shadowsocks应该不陌生，而一般普通网民可能知之甚少。shadowsocks实质上也是一种socks5代理服务，类似于ssh代理。与vpn的全局代理不同，shadowsocks仅针对浏览器代理，不能代理应用软件，比如youtube、twitter客户端软件。如果把vpn比喻为一把屠龙刀，那么shadowsocks就是一把瑞士军刀，轻巧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shadowsocks实现终端(iterm)下代理">
+<meta property="og:url" content="http://nicesu.github.io/2016/11/08/shadowsocks实现终端-iterm-下代理/index.html">
+<meta property="og:site_name" content="东岸往事">
+<meta property="og:description" content="##Shadowsocks
+github 地址
+码农对于shadowsocks应该不陌生，而一般普通网民可能知之甚少。shadowsocks实质上也是一种socks5代理服务，类似于ssh代理。与vpn的全局代理不同，shadowsocks仅针对浏览器代理，不能代理应用软件，比如youtube、twitter客户端软件。如果把vpn比喻为一把屠龙刀，那么shadowsocks就是一把瑞士军刀，轻巧">
+<meta property="og:updated_time" content="2016-11-08T09:38:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shadowsocks实现终端(iterm)下代理">
+<meta name="twitter:description" content="##Shadowsocks
+github 地址
+码农对于shadowsocks应该不陌生，而一般普通网民可能知之甚少。shadowsocks实质上也是一种socks5代理服务，类似于ssh代理。与vpn的全局代理不同，shadowsocks仅针对浏览器代理，不能代理应用软件，比如youtube、twitter客户端软件。如果把vpn比喻为一把屠龙刀，那么shadowsocks就是一把瑞士军刀，轻巧">
+    
+    
+        <link rel="icon" type="image/png" href="/images/favicon.ico" sizes="32x32" />
+    
+    <!-- title -->
+    <title>shadowsocks实现终端(iterm)下代理</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="http://localhost:4000/atom.xml" title="东岸往事" type="application/atom+xml" />
+    
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="content post width mx-auto px2 my4">
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <span class="top-subtitle">
+          <a href="/archives">Writing</a>
+      </span>
+      
+    <h1 class="posttitle" itemprop="name headline">
+        shadowsocks实现终端(iterm)下代理
+    </h1>
+
+
+
+      <div class="meta">
+          <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+              <span itemprop="name">东岸往事</span>
+          </span>
+          
+    <div class="postdate">
+        <time datetime="2016-11-08T09:34:41.000Z" itemprop="datePublished">2016-11-08</time>
+    </div>
+
+
+          
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Mac/">Mac</a>, <a class="tag-link" href="/tags/Shadowsocks/">Shadowsocks</a>, <a class="tag-link" href="/tags/iterm/">iterm</a>
+    </div>
+
+
+      </div>
+    </header>
+    
+
+    <div class="content" itemprop="articleBody">
+      <p>##Shadowsocks</p>
+<p><a href="https://github.com/shadowsocks/shadowsocks/tree/master" target="_blank" rel="external">github 地址</a></p>
+<p>码农对于shadowsocks应该不陌生，而一般普通网民可能知之甚少。shadowsocks实质上也是一种socks5代理服务，类似于ssh代理。与vpn的全局代理不同，shadowsocks仅针对浏览器代理，不能代理应用软件，比如youtube、twitter客户端软件。如果把vpn比喻为一把屠龙刀，那么shadowsocks就是一把瑞士军刀，轻巧方便，功能却非常强大。</p>
+<p>shadowsocks的可以使用在OX、iOS、Windows、Android等平台中，并且可以针对chrome浏览器进行单独配置，这里有一篇简书的文章，对各种配置方法进行了详细的介绍<a href="http://www.jianshu.com/p/08ba65d1f91a" target="_blank" rel="external">ShadowSocks—科学上网之瑞士军刀</a></p>
+<p>我这篇文章主要要讲的是网上比较少提到的<code>shadowsocks实现终端(iterm)下代理</code></p>
+<p>##使用proxychains-ng实现iterm代理</p>
+<p><a href="https://github.com/rofl0r/proxychains-ng" target="_blank" rel="external">github 地址</a></p>
+<p>官方说明：</p>
+<blockquote>
+<p>proxychains ng (new generation) - a preloader which hooks calls to sockets in dynamically linked programs and redirects it through one or more socks/http proxies. continuation of the unmaintained proxychains project.</p>
+</blockquote>
+<p>###安装</p>
+<p>使用 Homebrew 安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Tracy@666 ~  $ brew install proxychains-ng</div></pre></td></tr></table></figure></p>
+<p>###配置</p>
+<p>编辑配置文件 <code>vim /usr/local/etc/proxychains.conf</code><br>在 [ProxyList] 下面（也就是末尾）加入代理类型，代理地址和端口<br>例如使用 TOR 代理，注释掉原来的代理并添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">socks5  127.0.0.1 1080</div></pre></td></tr></table></figure></p>
+<p>如果所在的网络很复杂，可能需要在配置文件中启用<br>dynamic_chain - 按照列表中出现的代理服务器的先后顺序组成一条链，如果有代理服务器失效，则自动将其排除，但至少要有一个是有效的<br>然后在 [ProxyList] 下添加多个代理</p>
+<p>默认：<br>strict_chain - 按照后面列表中出现的代理服务器的先后顺序组成一条链，要求所有的代理服务器都是有效的</p>
+<p>###测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">proxychains4 curl google.com</div></pre></td></tr></table></figure>
+<p>注意：<code>proxychains支持的是socks，http, https协议.它们以tcp或者udp协议为基础, ping命令用的是 ICMP 协议， proxychains 不支持;</code></p>
+<p>###优化</p>
+<p>####alias<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alias pc=&quot;proxychains4&quot;</div></pre></td></tr></table></figure></p>
+<p>####iTerm中前缀补全</p>
+<p>你输了很长一段命令，然后你突然想使用代理功能，怎么办？</p>
+<p>我想你应该会复制一下，然后重写；</p>
+<p>现在你可以这样做：</p>
+<blockquote>
+<p>在 iTerm -&gt; Preferences -&gt; Profiles -&gt; Keys 中，新建一个快捷键，例如 ⌥ + p ，Action 选择 Send Hex Code，键值为 0x1 0x70 0x63 0x20 0xd，保存生效。</p>
+</blockquote>
+<p>以后命令要代理就直接敲命令，然后 ⌥ + p 即可，这样命令补全也能保留了</p>
+
+    </div>
+  </article>
+  
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+    </div>
+
+
+</div>
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2016 东岸往事
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/archives">Writing</a></li>
+        <li><a href="http://github.com/probberechts">Projects</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-58278611-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'dongan# Disqus Comments Shortname';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
