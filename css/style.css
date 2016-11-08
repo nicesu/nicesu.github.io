@@ -583,10 +583,10 @@ body {
   float: left;
   margin-right: 20px;
   width: 50px;
-  height: 65px;
+  height: 55px;
   background-repeat: no-repeat;
   background-image: url("http://imageshack.com/a/img924/8753/fnqT7C.png");
-  background-size: 50px 65px;
+  background-size: 50px 55px;
 }
 #sociallinks {
   display: inline-block;
@@ -596,15 +596,10 @@ body {
 }
 #sociallinks li {
   display: inline-block;
+  margin-left: 15px;
 }
 #sociallinks li:after {
-  content: ", ";
-}
-#sociallinks li:last-child:after {
-  content: "";
-}
-#sociallinks li:nth-last-child(3) ~ li:nth-last-child(2):after {
-  content: " and ";
+  content: "  ";
 }
 .post-list {
   padding: 0;
